@@ -61,3 +61,30 @@ jobs:
           tags: |
             ${{ env.IMAGE_NAME }}:production
             ${{ env.IMAGE_NAME }}:latest
+
+  # Deploys :production to the VPS over SSH. Requires DEPLOY_SSH_HOST, DEPLOY_SSH_USER, and
+  # DEPLOY_SSH_KEY repo secrets (DEPLOY_SSH_PORT is optional, defaults to 22) — none are
+  # configured yet, so this job will fail at the SSH-connect step until they're added under
+  # Settings → Secrets. See apps/admin/README.md's Deployment section.
+  deploy-production:
+    needs: build-production
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_SSH_HOST }}
+          username: ${{ secrets.DEPLOY_SSH_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_SSH_PORT || 22 }}
+          envs: GITHUB_TOKEN,GITHUB_ACTOR,IMAGE_NAME
+          script: |
+            echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+            docker pull "$IMAGE_NAME:production"
+            docker stop nawara-drive-admin 2>/dev/null || true
+            docker rm nawara-drive-admin 2>/dev/null || true
+            docker run -d --name nawara-drive-admin --restart unless-stopped -p 80:80 "$IMAGE_NAME:production"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
