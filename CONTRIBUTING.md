@@ -104,3 +104,18 @@ To encrypt an additional file going forward, add a line to `.gitattributes`:
 ```
 
 then re-add/commit the file normally.
+
+### Automatic verification before push
+
+A `pre-push` hook (`.husky/pre-push`) runs `git-crypt status` before every push and **aborts the
+push** if any file marked for encryption in `.gitattributes` was actually committed as plaintext
+— this is the classic git-crypt gotcha (adding the attribute *after* a file was already committed
+unencrypted; the attribute alone doesn't retroactively encrypt history). If that happens, the hook
+tells you to run:
+
+```
+git-crypt status -f   # re-encrypts the offending file(s) and stages the fix
+```
+
+then commit and push again. If `git-crypt` isn't installed on the machine doing the push, the hook
+only warns (it can't verify) rather than blocking — install `git-crypt` to get the actual check.

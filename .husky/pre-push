@@ -1,0 +1,16 @@
+if command -v git-crypt >/dev/null 2>&1; then
+  status_output=$(git-crypt status 2>&1)
+  status_exit=$?
+  if [ "$status_exit" -ne 0 ]; then
+    echo "$status_output" >&2
+    echo "" >&2
+    echo "Push aborted: a file marked for encryption in .gitattributes was committed" >&2
+    echo "as plaintext (see above). Run 'git-crypt status -f' to fix it, then commit" >&2
+    echo "the re-encrypted file and push again." >&2
+    exit 1
+  fi
+else
+  echo "Warning: git-crypt is not installed, so encrypted-file status could not be" >&2
+  echo "verified before this push. Install git-crypt if this repo relies on it." >&2
+fi
+exit 0
