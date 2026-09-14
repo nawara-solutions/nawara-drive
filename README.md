@@ -3,6 +3,7 @@
 **Nawara Drive** is a digital platform for driving schools, built by **Nawara Solution**. It replaces paper logbooks, phone-call bookings, and scattered scheduling with one connected system for driving school administration, instructors, and students.
 
 The platform has two clients:
+
 - **Admin Dashboard (Web/Desktop)** — used by Nawara Solution / driving school administrators to manage schools, instructors, students, payments, and content.
 - **Mobile App (iOS/Android)** — used by **Instructors** (manage students, schedule, record lessons and exam results) and **Students** (learn traffic rules, book lessons, track exam progress).
 
@@ -19,6 +20,7 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full use-case breakdown, class 
 ## Monetization
 
 Nawara Drive has a **two-sided payment model**:
+
 - **B2B — School License**: driving schools pay a subscription/license fee to use the platform.
 - **B2C — Student Subscription**: individual students pay a subscription fee to access courses, book lessons, and track their progress.
 

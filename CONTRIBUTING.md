@@ -72,6 +72,7 @@ git push -u origin feat/upload-progress
 ```
 
 Then open the PR, e.g. via `mcp__github__create_pull_request`, with:
+
 - `title`: `feat: show progress bar during large file uploads`
 - `body`: filled-in PR template (Summary / Changes / Test plan)
 - `base`: `main`, `head`: `feat/upload-progress`
@@ -109,7 +110,7 @@ then re-add/commit the file normally.
 
 A `pre-push` hook (`.husky/pre-push`) runs `git-crypt status` before every push and **aborts the
 push** if any file marked for encryption in `.gitattributes` was actually committed as plaintext
-— this is the classic git-crypt gotcha (adding the attribute *after* a file was already committed
+— this is the classic git-crypt gotcha (adding the attribute _after_ a file was already committed
 unencrypted; the attribute alone doesn't retroactively encrypt history). If that happens, the hook
 tells you to run:
 
