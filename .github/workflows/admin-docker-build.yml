@@ -85,7 +85,7 @@ jobs:
             docker run -d --name nawara-drive-admin --restart unless-stopped \
               --network deploy_edge \
               --label traefik.enable=true \
-              --label traefik.http.routers.nawara-drive-admin.rule=Host\(\`drive-admin.hsalem.anwar.dev\`\) \
+              --label traefik.http.routers.nawara-drive-admin.rule=Host\(\`drive-admin.hsalem-anwar.dev\`\) \
               --label traefik.http.routers.nawara-drive-admin.entrypoints=websecure \
               --label traefik.http.routers.nawara-drive-admin.tls.certresolver=le \
               --label traefik.http.services.nawara-drive-admin.loadbalancer.server.port=80 \
