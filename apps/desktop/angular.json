@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "admin": {
+    "desktop": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -58,10 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "admin:build:production"
+              "buildTarget": "desktop:build:production"
             },
             "development": {
-              "buildTarget": "admin:build:development"
+              "buildTarget": "desktop:build:development"
             }
           },
           "defaultConfiguration": "development"

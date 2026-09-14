@@ -9,5 +9,5 @@ import { WelcomeCard } from './components/welcome-card/welcome-card';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('Nawara Drive Admin');
+  protected readonly title = signal('Nawara Drive');
 }

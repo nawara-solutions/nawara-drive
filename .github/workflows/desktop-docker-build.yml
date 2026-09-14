@@ -1,16 +1,16 @@
-name: Admin Docker build
+name: Desktop Docker build
 
 on:
   pull_request:
     branches: [main]
     paths:
-      - 'apps/admin/**'
-      - '.github/workflows/admin-docker-build.yml'
+      - 'apps/desktop/**'
+      - '.github/workflows/desktop-docker-build.yml'
   push:
     branches: [main]
     paths:
-      - 'apps/admin/**'
-      - '.github/workflows/admin-docker-build.yml'
+      - 'apps/desktop/**'
+      - '.github/workflows/desktop-docker-build.yml'
 
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/nawara-drive-admin
@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v7
         with:
-          context: apps/admin
+          context: apps/desktop
           build-args: |
             BUILD_CONFIGURATION=development
           push: true
@@ -54,7 +54,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v7
         with:
-          context: apps/admin
+          context: apps/desktop
           build-args: |
             BUILD_CONFIGURATION=production
           push: true
@@ -64,7 +64,10 @@ jobs:
 
   # Deploys :production to the VPS over SSH. Requires DEPLOY_SSH_HOST, DEPLOY_SSH_USER, and
   # DEPLOY_SSH_PASSWORD repo secrets (DEPLOY_SSH_PORT is optional, defaults to 22). See
-  # apps/admin/README.md's Deployment section for the security trade-off of password auth here.
+  # apps/desktop/README.md's Deployment section for the security trade-off of password auth here.
+  # Note: the deployed image/container/hostname below intentionally keep their legacy
+  # "nawara-drive-admin" / "drive-admin.hsalem-anwar.dev" names even though the source
+  # folder is now apps/desktop — see ADR-0003 for why (avoids a DNS/deploy cutover).
   deploy-production:
     needs: build-production
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
