@@ -71,6 +71,27 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
+      # TEMPORARY diagnostic step — reports whether each deploy secret is set and how long it
+      # is, WITHOUT ever printing the value. Remove once the deploy secrets are confirmed correct.
+      - name: Debug deploy secrets (presence/length only)
+        run: |
+          check() {
+            name="$1"; value="$2"
+            if [ -z "$value" ]; then
+              echo "$name: NOT SET (empty)"
+            else
+              echo "$name: set, length=${#value}"
+            fi
+          }
+          check DEPLOY_SSH_HOST "$DEPLOY_SSH_HOST"
+          check DEPLOY_SSH_USER "$DEPLOY_SSH_USER"
+          check DEPLOY_SSH_KEY "$DEPLOY_SSH_KEY"
+          check DEPLOY_SSH_PORT "$DEPLOY_SSH_PORT"
+        env:
+          DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+          DEPLOY_SSH_USER: ${{ secrets.DEPLOY_SSH_USER }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_SSH_PORT: ${{ secrets.DEPLOY_SSH_PORT }}
       - uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DEPLOY_SSH_HOST }}
