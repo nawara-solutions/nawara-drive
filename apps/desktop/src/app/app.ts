@@ -1,9 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { WelcomeCard } from './components/welcome-card/welcome-card';
 
 @Component({
-  imports: [RouterOutlet, WelcomeCard],
+  imports: [RouterOutlet],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
