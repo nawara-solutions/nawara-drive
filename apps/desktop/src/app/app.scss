@@ -6,7 +6,7 @@
 
 .app-header {
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--color-border);
 
   &__title {
     margin: 0;
@@ -23,7 +23,7 @@
 
 .app-footer {
   padding: 1rem 2rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid var(--color-border);
 
   &__meta {
     margin: 0;
