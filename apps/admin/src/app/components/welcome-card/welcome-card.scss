@@ -27,4 +27,13 @@
     margin: 0;
     color: var(--color-text-muted);
   }
+
+  &__api-greeting {
+    margin: 0.75rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
 }
