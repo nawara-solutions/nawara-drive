@@ -78,11 +78,11 @@ jobs:
           port: ${{ secrets.DEPLOY_SSH_PORT || 22 }}
           envs: GITHUB_TOKEN,GITHUB_ACTOR,IMAGE_NAME
           script: |
-            echo "$GITHUB_TOKEN" | sudo -n docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
-            sudo -n docker pull "$IMAGE_NAME:production"
-            sudo -n docker stop nawara-drive-admin 2>/dev/null || true
-            sudo -n docker rm nawara-drive-admin 2>/dev/null || true
-            sudo -n docker run -d --name nawara-drive-admin --restart unless-stopped -p 80:80 "$IMAGE_NAME:production"
+            echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+            docker pull "$IMAGE_NAME:production"
+            docker stop nawara-drive-admin 2>/dev/null || true
+            docker rm nawara-drive-admin 2>/dev/null || true
+            docker run -d --name nawara-drive-admin --restart unless-stopped -p 80:80 "$IMAGE_NAME:production"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
