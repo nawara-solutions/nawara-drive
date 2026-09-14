@@ -35,20 +35,26 @@ Nawara Drive has a **two-sided payment model**:
 ## Repository Structure (proposed)
 
 ```
-nawara-drive/
+nawara-solution/
 ├── apps/
-│   ├── admin-web/        # Admin dashboard (React/Angular)
-│   ├── mobile-app/       # Instructor + Student app (React Native)
-├── services/
-│   ├── auth-service/
-│   ├── user-service/
-│   ├── booking-service/
-│   ├── exam-service/
-│   ├── payment-service/
-│   ├── notification-service/
-│   ├── content-service/
-│   └── ai-service/
-├── infra/                # Docker, k8s, CI/CD configs
+│   ├── nawara-drive-admin/      # Admin web dashboard (React/Angular)
+│   ├── nawara-drive-mobile/     # Instructor + Student app (React Native)
+│   ├── auth-service/            # reusable across all future apps
+│   ├── notification-service/    # reusable
+│   ├── payment-service/         # reusable
+│   ├── ai-service/               # reusable
+│   ├── user-service/             # Nawara Drive specific
+│   ├── booking-service/          # Nawara Drive specific
+│   ├── exam-service/             # Nawara Drive specific
+│   └── content-service/          # Nawara Drive specific
+├── libs/
+│   ├── shared-types/             # DTOs/interfaces shared across services & frontends
+│   ├── shared-auth-guard/        # JWT validation middleware reused by every service
+│   ├── shared-utils/
+│   └── shared-config/
+├── infra/
+│   ├── docker-compose.yml        # spin up all services locally
+│   └── k8s/                      # later, when needed
 ├── ARCHITECTURE.md
 └── README.md
 ```
