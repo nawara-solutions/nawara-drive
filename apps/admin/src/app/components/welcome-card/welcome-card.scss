@@ -1,0 +1,30 @@
+@keyframes welcome-card-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcome-card {
+  max-width: 32rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+  animation: welcome-card-fade-in-up 0.4s ease-out both;
+
+  &__title {
+    margin: 0 0 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+}
