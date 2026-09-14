@@ -3,4 +3,7 @@
   <p class="welcome-card__text">
     Manage schools, instructors, students, payments, and content from one place.
   </p>
+  @if (apiGreeting()) {
+    <p class="welcome-card__api-greeting">{{ apiGreeting() }}</p>
+  }
 </section>
