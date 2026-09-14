@@ -10,12 +10,14 @@
   "scripts": {
     "prepare": "husky",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test:e2e": "playwright test --config=e2e/playwright.config.ts"
   },
   "license": "ISC",
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
+    "@playwright/test": "1.63.0",
     "husky": "^9.1.7",
     "lint-staged": "17.5.1",
     "prettier": "3.9.6"
