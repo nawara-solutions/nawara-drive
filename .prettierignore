@@ -1,6 +1,7 @@
 node_modules
 package-lock.json
 .claude
+apps/admin/src-tauri/target
 
 # git-crypt encrypted — checks out as ciphertext for anyone/anything without
 # the key (CI included), so Prettier can't meaningfully format-check it.
