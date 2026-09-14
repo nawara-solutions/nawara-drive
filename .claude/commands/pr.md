@@ -11,9 +11,8 @@ squash merge).
 Steps:
 1. Run `git status` and `git branch`. If there are uncommitted changes, stop and tell the user to
    commit first (e.g. with `/commit`) — don't commit on their behalf here.
-2. If the current branch is `main`, stop and tell the user which branch name you'd suggest
-   (`type/short-kebab-description`, matching the change) and ask them to create/checkout it
-   first — don't invent a branch and switch for them without asking.
+2. If the current branch is `main`, stop and tell the user to run `/branch` first — don't invent
+   a branch and switch for them without asking.
 3. Confirm the branch has commits ahead of `main` (`git log main..HEAD --oneline`). If there are
    none, say so instead of opening an empty PR.
 4. Push the branch: `git push -u origin <branch>` (only if it isn't already up to date with the
