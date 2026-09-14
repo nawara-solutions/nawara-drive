@@ -4,7 +4,7 @@
 
 The platform has two clients:
 
-- **Admin Dashboard (Web/Desktop)** — used by Nawara Solution / driving school administrators to manage schools, instructors, students, payments, and content.
+- **Desktop App** — used by Nawara Solution staff (full access) and driving-school staff (School Admin, scoped to their own school) to manage schools, instructors, students, payments, and content.
 - **Mobile App (iOS/Android)** — used by **Instructors** (manage students, schedule, record lessons and exam results) and **Students** (learn traffic rules, book lessons, track exam progress).
 
 ## The Learning Path
@@ -39,7 +39,7 @@ Nawara Drive has a **two-sided payment model**:
 ```
 nawara-solution/
 ├── apps/
-│   ├── admin/                    # Admin web dashboard (Angular)
+│   ├── desktop/                   # Desktop app — Admin + School Admin (Angular)
 │   ├── mobile/                   # Instructor + Student app (React Native / Expo)
 │   ├── auth-service/            # reusable across all future apps
 │   ├── notification-service/    # reusable

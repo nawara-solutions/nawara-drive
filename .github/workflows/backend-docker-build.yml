@@ -58,9 +58,10 @@ jobs:
             ${{ env.IMAGE_NAME }}:production
             ${{ env.IMAGE_NAME }}:latest
 
-  # Deploys :production to the same VPS as admin, over SSH, routed through the existing
-  # Traefik proxy on the deploy_edge network. Reuses admin's DEPLOY_SSH_* repo secrets — no
-  # new secrets needed. See apps/backend/README.md's Deployment section.
+  # Deploys :production to the same VPS as the desktop app, over SSH, routed through the
+  # existing Traefik proxy on the deploy_edge network. Reuses the desktop app's
+  # DEPLOY_SSH_* repo secrets — no new secrets needed. See apps/backend/README.md's
+  # Deployment section.
   deploy-production:
     needs: build-production
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'

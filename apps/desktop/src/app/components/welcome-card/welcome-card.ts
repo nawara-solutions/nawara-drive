@@ -12,7 +12,7 @@ export class WelcomeCard implements OnInit {
   protected readonly apiGreeting = signal<string | null>(null);
 
   ngOnInit(): void {
-    this.driveApi.getHelloAdmin().subscribe({
+    this.driveApi.getHelloDesktop().subscribe({
       next: (greeting) => this.apiGreeting.set(greeting),
       error: () => this.apiGreeting.set(null),
     });

@@ -8,7 +8,7 @@ const API_BASE_URL = isDevMode() ? 'http://localhost:3000' : 'https://drive-api.
 export class DriveApiService {
   constructor(private readonly http: HttpClient) {}
 
-  getHelloAdmin(): Observable<string> {
-    return this.http.get(`${API_BASE_URL}/drive/hello-admin`, { responseType: 'text' });
+  getHelloDesktop(): Observable<string> {
+    return this.http.get(`${API_BASE_URL}/drive/hello-desktop`, { responseType: 'text' });
   }
 }

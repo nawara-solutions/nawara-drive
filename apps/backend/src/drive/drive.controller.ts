@@ -5,8 +5,8 @@ import { DriveService } from './drive.service.js';
 export class DriveController {
   constructor(private readonly driveService: DriveService) {}
 
-  @Get('hello-admin')
-  getHelloAdmin(): string {
-    return this.driveService.getHelloAdmin();
+  @Get('hello-desktop')
+  getHelloDesktop(): string {
+    return this.driveService.getHelloDesktop();
   }
 }
