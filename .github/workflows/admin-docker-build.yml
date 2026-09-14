@@ -63,40 +63,18 @@ jobs:
             ${{ env.IMAGE_NAME }}:latest
 
   # Deploys :production to the VPS over SSH. Requires DEPLOY_SSH_HOST, DEPLOY_SSH_USER, and
-  # DEPLOY_SSH_KEY repo secrets (DEPLOY_SSH_PORT is optional, defaults to 22) — none are
-  # configured yet, so this job will fail at the SSH-connect step until they're added under
-  # Settings → Secrets. See apps/admin/README.md's Deployment section.
+  # DEPLOY_SSH_PASSWORD repo secrets (DEPLOY_SSH_PORT is optional, defaults to 22). See
+  # apps/admin/README.md's Deployment section for the security trade-off of password auth here.
   deploy-production:
     needs: build-production
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      # TEMPORARY diagnostic step — reports whether each deploy secret is set and how long it
-      # is, WITHOUT ever printing the value. Remove once the deploy secrets are confirmed correct.
-      - name: Debug deploy secrets (presence/length only)
-        run: |
-          check() {
-            name="$1"; value="$2"
-            if [ -z "$value" ]; then
-              echo "$name: NOT SET (empty)"
-            else
-              echo "$name: set, length=${#value}"
-            fi
-          }
-          check DEPLOY_SSH_HOST "$DEPLOY_SSH_HOST"
-          check DEPLOY_SSH_USER "$DEPLOY_SSH_USER"
-          check DEPLOY_SSH_KEY "$DEPLOY_SSH_KEY"
-          check DEPLOY_SSH_PORT "$DEPLOY_SSH_PORT"
-        env:
-          DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
-          DEPLOY_SSH_USER: ${{ secrets.DEPLOY_SSH_USER }}
-          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          DEPLOY_SSH_PORT: ${{ secrets.DEPLOY_SSH_PORT }}
       - uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DEPLOY_SSH_HOST }}
           username: ${{ secrets.DEPLOY_SSH_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          password: ${{ secrets.DEPLOY_SSH_PASSWORD }}
           port: ${{ secrets.DEPLOY_SSH_PORT || 22 }}
           envs: GITHUB_TOKEN,GITHUB_ACTOR,IMAGE_NAME
           script: |
