@@ -81,3 +81,26 @@ Then open the PR, e.g. via `mcp__github__create_pull_request`, with:
 This repo's root `package.json` holds dev tooling only (`husky`, `@commitlint/cli`,
 `@commitlint/config-conventional`). Run `npm install` once after cloning so the
 `commit-msg` hook is active — it's wired via the `prepare` script (husky v9).
+
+## Encrypted files
+
+This repo is public, but a few files hold internal-only content and are encrypted at rest with
+[`git-crypt`](https://github.com/AGWA-git/git-crypt) — currently just `ARCHITECTURE.md`. Anyone
+browsing on GitHub without the key sees unreadable binary. Locally, once you've unlocked the repo,
+those files read and edit like any other file — git handles the encryption transparently on
+every commit/checkout.
+
+To work with encrypted files on a new clone:
+
+1. Install `git-crypt` (`sudo apt install git-crypt` on Debian/Kali).
+2. Get the symmetric key out-of-band from whoever holds it (**not** via this repo — it's kept
+   outside git entirely, e.g. a password manager).
+3. `git-crypt unlock /path/to/the.key`
+
+To encrypt an additional file going forward, add a line to `.gitattributes`:
+
+```
+<path> filter=git-crypt diff=git-crypt
+```
+
+then re-add/commit the file normally.
