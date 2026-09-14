@@ -39,8 +39,8 @@ Nawara Drive has a **two-sided payment model**:
 ```
 nawara-solution/
 ├── apps/
-│   ├── nawara-drive-admin/      # Admin web dashboard (React/Angular)
-│   ├── nawara-drive-mobile/     # Instructor + Student app (React Native)
+│   ├── admin/                    # Admin web dashboard (Angular)
+│   ├── mobile/                   # Instructor + Student app (React Native / Expo)
 │   ├── auth-service/            # reusable across all future apps
 │   ├── notification-service/    # reusable
 │   ├── payment-service/         # reusable
