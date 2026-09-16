@@ -10,5 +10,19 @@
       "Edit(**/.env)",
       "Edit(**/.env.*)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/design-doc-conformance-trigger.sh",
+            "statusMessage": "Checking design-doc conformance..."
+          }
+        ]
+      }
+    ]
   }
 }
